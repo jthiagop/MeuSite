@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Foro;
+use App\Models\User;
 
 class PatrController extends Controller
 {
@@ -44,12 +45,19 @@ class PatrController extends Controller
     }
 
     public function show($id) {
-    
+
         $foros = Foro::findOrFail($id);
+
 
         return view('events.show', ['foro' => $foros]);
 
     }
+
+    public function cadastro_enfiteuta(){
+
+        return view('events.cadastro_enfiteuta');
+    }
+
 
 }
 

@@ -15,11 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PatrController;
 
+Route::get('/cadastro_enfiteuta', [PatrController::class, 'cadastro_enfiteuta']);
 Route::get('/', [PatrController::class, 'index']); /** index - mostra todos os registros  */
-Route::get('/events/create', [PatrController::class, 'create']); /** create - mostrar o formulário para criar registro no banco */
+Route::get('/events/create', [PatrController::class, 'create'])->middleware(['auth:sanctum','verified']); /** create - mostrar o formulário para criar registro no banco */
 Route::get('/events/{id}', [PatrController::class, 'show']); /** mostrar um dado específico  */
 Route::post('/events',[PatrController::class, 'store']); /** sotre = enviar arquivos do banco */
 
-Route::get('/dashboard', function () {
+
+
+Route::get('/dashboard',function (){
     return view('dashboard');
-});
+})->name('dashboard')->middleware(['auth:sanctum','verified']);

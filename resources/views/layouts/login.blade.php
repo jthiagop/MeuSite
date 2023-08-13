@@ -57,6 +57,15 @@
         <link rel="stylesheet" type="text/css" href="/vendors/styles/cores.css" />
 
 		<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="src/plugins/jquery-steps/jquery.steps.css"
+		/>
+
+
 		<script
 			async
 			src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
@@ -100,12 +109,146 @@
 						<img src="/vendors/images/deskapp-logo.svg" alt="" />
 					</a>
 				</div>
-				<div class="login-menu">
-					<ul>
-						<li><a href="/events/create">Login</a></li>
-					</ul>
+                @auth
 
+                <div class="header-right">
+                    <div class="dashboard-setting user-notification">
+                        <div class="dropdown">
+                            <a
+                                class="dropdown-toggle no-arrow"
+                                href="/dashboard"
+                                data-toggle="right-sidebar"
+                            >
+                            <i class="icon-copy dw dw-house"></i>
+
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="user-notification">
+                        <div class="dropdown">
+                            <a
+                                class="dropdown-toggle no-arrow"
+                                href="#"
+                                role="button"
+                                data-toggle="dropdown"
+                            >
+                                <i class="icon-copy dw dw-notification"></i>
+                                <span class="badge notification-active"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div class="notification-list mx-h-350 customscroll">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <img src="/vendors/images/img.jpg" alt="" />
+                                                <h3>John Doe</h3>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                    elit, sed...
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img src="/vendors/images/photo1.jpg" alt="" />
+                                                <h3>Lea R. Frith</h3>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                    elit, sed...
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img src="/vendors/images/photo2.jpg" alt="" />
+                                                <h3>Erik L. Richards</h3>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                    elit, sed...
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img src="/vendors/images/photo3.jpg" alt="" />
+                                                <h3>John Doe</h3>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                    elit, sed...
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img src="/vendors/images/photo4.jpg" alt="" />
+                                                <h3>Renee I. Hansen</h3>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                    elit, sed...
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img src="/vendors/images/img.jpg" alt="" />
+                                                <h3>Vicki M. Coleman</h3>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                    elit, sed...
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-info-dropdown">
+                        <div class="dropdown">
+                            <a
+                                class="dropdown-toggle"
+                                href="#"
+                                role="button"
+                                data-toggle="dropdown"
+                            >
+                                <span class="user-icon">
+                                    <img src="/vendors/images/photo1.jpg" alt="" />
+                                </span>
+                                <span class="user-name">{{ Auth::user()->name }}</span>
+                            </a>
+                            <div
+                                class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+                            >
+                                <a class="dropdown-item" href="profile.html"
+                                    ><i class="dw dw-user1"></i> Perfil</a
+                                >
+                                <a class="dropdown-item" href="user/profile"
+                                    ><i class="dw dw-settings2"></i> Configuração</a
+                                >
+                                <a class="dropdown-item" href="faq.html"
+                                    ><i class="dw dw-help"></i> Ajuda</a
+                                >
+                                <form action="/logout" method="POST">
+                                    @csrf
+                                <a href="/"
+                                    class="dropdown-item"
+                                    onclick="event.preventDefault()
+                                    this.closest('form').submit();"><i class="dw dw-logout"></i> Sair</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @endauth
+                @guest
+				<div class="login-menu btn btn-link">
+					<ul>
+						<li><a href="/login">Login</a></li>
+					</ul>
 				</div>
+                @endguest
 			</div>
 		</div>
 
@@ -150,6 +293,9 @@
 		<script src="/vendors/scripts/script.min.js"></script>
 		<script src="/vendors/scripts/process.js"></script>
 		<script src="/vendors/scripts/layout-settings.js"></script>
+
+		<script src="src/plugins/jquery-steps/jquery.steps.js"></script>
+		<script src="vendors/scripts/steps-setting.js"></script>
 		<!-- Google Tag Manager (noscript) -->
 		<noscript
 			><iframe

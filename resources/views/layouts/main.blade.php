@@ -9,19 +9,19 @@
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
-			href="/vendors/images/apple-touch-icon.png"
+			href="/vendors/images/apple-touch-icon.svg"
 		/>
 		<link
 			rel="icon"
-			type="image/png"
+			type="image/svg"
 			sizes="32x32"
-			href="/vendors/images/favicon-32x32.png"
+			href="/vendors/images/favicon-32x32.svg"
 		/>
 		<link
 			rel="icon"
-			type="image/png"
+			type="image/svg"
 			sizes="16x16"
-			href="/vendors/images/favicon-16x16.png"
+			href="/vendors/images/favicon-16x16.svg"
 		/>
 
 		<!-- Mobile Specific Metas -->
@@ -89,19 +89,20 @@
 		</script>
 		<!-- End Google Tag Manager -->
 	</head>
-	@yield('content')
+
+    @auth
 	<main>
 		<div class="container-fluid">
 			<div class="row">
 				@if(session('msg'))
 					<p class="msg">{{ session('msg') }}</p>
 				@endif
-				
+
 			</div>
 		</div>
 	</main>
 	<body>
-        
+
         <div class="header">
 			<div class="header-left">
 				<div class="menu-icon bi bi-list"></div>
@@ -116,7 +117,7 @@
 							<input
 								type="text"
 								class="form-control search-input"
-								placeholder="Pesquisar..."
+								placeholder="Buscar"
 							/>
 							<div class="dropdown">
 								<a
@@ -270,23 +271,27 @@
 							<span class="user-icon">
 								<img src="/vendors/images/photo1.jpg" alt="" />
 							</span>
-							<span class="user-name">José Thiago</span>
+							<span class="user-name">{{ Auth::user()->name }}</span>
 						</a>
 						<div
 							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
 						>
 							<a class="dropdown-item" href="profile.html"
-								><i class="dw dw-user1"></i> Profile</a
+								><i class="dw dw-user1"></i> Perfil</a
 							>
-							<a class="dropdown-item" href="profile.html"
-								><i class="dw dw-settings2"></i> Setting</a
+							<a class="dropdown-item" href="user/profile"
+								><i class="dw dw-settings2"></i> Configuração</a
 							>
 							<a class="dropdown-item" href="faq.html"
-								><i class="dw dw-help"></i> Help</a
+								><i class="dw dw-help"></i> Ajuda</a
 							>
-							<a class="dropdown-item" href="/"
-								><i class="dw dw-logout"></i> Log Out</a
-							>
+                            <form action="/logout" method="POST">
+                                @csrf
+                            <a href="/"
+                                class="dropdown-item"
+                                onclick="event.preventDefault()
+                                this.closest('form').submit();"><i class="dw dw-logout"></i> Sair</a>
+                            </form>
 						</div>
 					</div>
 				</div>
@@ -368,7 +373,8 @@
 								><span class="mtext">Início</span>
 							</a>
 							<ul class="submenu">
-								<li><a href="cadastro_foro.php">Patrimônio</a></li>
+                                <li><a href="/">Home</a></li>
+								<li><a href="/events/create">Patrimônio</a></li>
 								<li><a href="#">Veículos</a></li>
 								<li><a href="#">Planos de Saúde</a></li>
 								<li><a href="#">Financeiro</a></li>
@@ -452,20 +458,21 @@
 					</ul>
 				</div>
 			</div>
+            @yield('content')
 			    	<!-- Fim de Menu Lateral -->
 		    </div>
- 
-          				 <div class="footer-wrap pd-20 mb-20 card-box">
-            						 <footer>
-            							  2023 &copy; Dominus Sistema de Automação - 
-														Todos os direitos reservados - v1.0.1.03
-													
-           								 </footer>
-		     					 </div>
+
+          				<div class="footer-wrap pd-20 mb-20 card-box">
+            				<footer>
+            				    2023 &copy; Dominus Sistema de Automação -
+								Todos os direitos reservados - v1.0.1.03
+           					</footer>
+		     			</div>
 		</div>
 </div>
 
         </div>
+
 
 		<!-- welcome modal start -->
 		<div class="welcome-modal">
@@ -501,6 +508,7 @@
 		<button class="welcome-modal-btn">
         <i class="icon-copy bi bi-life-preserver"></i></i> Ajuda
 		</button>
+
 		<!-- welcome modal end -->
 		<!-- js -->
 		<script src="/vendors/scripts/core.js"></script>
@@ -525,3 +533,4 @@
 		<!-- End Google Tag Manager (noscript) -->
     </body>
 </html>
+@endauth
